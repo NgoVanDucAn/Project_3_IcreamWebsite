@@ -1,0 +1,155 @@
+﻿@using C2108G1_Project_3.Repository
+@using C2108G1_Project_3.Models
+@inject IRecipesRepository recipesRepository
+@inject IFlavorsRepostiory flavorsRepository
+@inject IUsersRepository<Users> usersRepository
+@{
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    var flavors = await flavorsRepository.GetAllAsync();
+    var recipes = await recipesRepository.GetAllAsync();
+    var users = await usersRepository.GetAllUsers();
+
+     var x = new Recipes();
+    if (Model > 0)
+    {
+        x = await recipesRepository.GetByIdAsync(Model);
+    }
+
+}
+
+
+<!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Add Recipe</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Add Recipe</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Products Start -->
+
+
+
+<form class="custom__form container-fluid container" method="post" action="/Recipes/CreateOrupdateRecipesForUser" enctype="multipart/form-data">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <h1 class="section-title position-relative text-center mb-5">Add Recipe</h1>
+                </div>
+            </div>
+            <input type="hidden" name="id" value="@x.id" required />
+            <div class="">
+                <div class="">
+                    <label  for="name"><strong><h3>INPUT NAME</h3></strong></label><br>
+            <input class="form-control" type="text" id="name" style="width: 500px;" name="recipeName" value="@x.recipeName">
+                    <label for="name"><strong><h3>INTRODUCTION</h3></strong></label><br>
+            <textarea class="form-control" type="text" id="name" name="introduce" style="height: 100px;">@x.introduce</textarea>
+                </div>
+
+
+            </div>
+
+            <div class="">
+                <div>
+                    <label>Flavor:</label>
+                    <select name="flavorsId" class="form-control" style="width: 200px;">
+                        @foreach (var flavor in flavors)
+                        {
+                            var isSelected = (flavor.id == x.flavorsId);
+                            <option value="@flavor.id">@flavor.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <script>
+                    var flavorsId = "@x.flavorsId"; // Lấy giá trị IdentityUserId từ Razor và gán cho biến JavaScript
+
+                    var selectElement = document.querySelector('select[name="flavorsId"]');
+                    var options = selectElement.options;
+
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].value === flavorsId) {
+                            options[i].selected = true;
+                            break;
+                        }
+                    }
+                </script>
+
+
+        
+            </div> 
+            
+            <br>
+                <div>
+                    <!-- Trường textarea để hiển thị nội dung Summernote -->
+
+                    <style>
+                        .note-editor {
+                        background-color: #f2f2f2; /* Màu nền của Summernote */
+                        border-radius: 10px;
+                        }
+                    </style>
+                    <div class="">
+                        <label  for="name"><strong><h3>Recipe Details</h3></strong></label><br>
+                        <!-- Trường input ẩn để lưu trữ nội dung Summernote -->
+                           <div>
+                            <textarea class="note-editor" id="summernote" name="recipeDescription" value="">@x.recipeDescription</textarea>
+                                </div>
+                        <!-- Địa điểm mà Summernote sẽ được hiển thị -->
+                        <script>
+                            $('#summernote').summernote({
+                                placeholder: 'Hello Bootstrap 4',
+                                tabsize: 2,
+                                height: 100
+                            })
+                        </script>
+                    </div>
+                </div>
+                <br>
+                <strong><h4>Add Image</h4></strong>
+                <div>
+                    <img id="thumbnailPreview" src="" alt="Thumbnail Preview" style="width: 200px; height: 200px;" />
+                    <input type="file" id="thumbnailInput" name="thumbnail" onchange="previewThumbnail(event)" value="@x.thumbnail" required />
+                </div>
+
+
+                <div class="form__controls"><button type="submit" class="btn btn-success">Submit</button></div>
+
+                </form>
+
+                
+                <form method="post" action="/Recipes/DeleteRecipe" onsubmit="return confirm('Are you sure you want to delete this flavors?');">
+                    <br />
+                    <div class="form__controls">
+                        <input type="hidden" name="id" value="@x.id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+        <script>
+            function previewThumbnail(event) {
+                                var input = event.target;
+                                        var reader = new FileReader();
+
+                                        reader.onload = function () {
+                                        var dataURL = reader.result;
+                                            var thumbnailPreview = document.getElementById('thumbnailPreview');
+                                            thumbnailPreview.src = dataURL;
+                                        };
+
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+
+                                    // Lấy URL của ảnh từ cơ sở dữ liệu và hiển thị ảnh trước khi chỉnh sửa
+                                    var thumbnailUrl = '/UploadImg/@x.thumbnail'; // Thay thế bằng URL thực tế từ cơ sở dữ liệu
+                                    var thumbnailPreview = document.getElementById('thumbnailPreview');
+                                    thumbnailPreview.src = thumbnailUrl;
+        </script>
+
+
+
+    <!-- Products End -->

@@ -1,0 +1,24 @@
+﻿<div class="order-container"></div>
+
+<script>
+    $(document).ready(function () {
+        var orders = localStorage.getItem('book_order');
+        if (orders) {
+            orders = JSON.parse(orders);
+            orders.forEach(function (order) {
+                // Bạn có thể gọi AJAX tại đây để lấy thêm thông tin sách theo ID
+                // Hoặc bạn có thể sử dụng trực tiếp dữ liệu từ localStorage
+
+                var html = `
+                            <div class="order-item">
+                                    <img src="${order.thumbnail}" alt="${order.bookName}" />
+                                <h2>${order.bookName}</h2>
+                                <p>Số lượng: ${order.quantity}</p>
+                            </div>
+                        `;
+
+                $(".order-container").append(html);
+            });
+        }
+    });
+</script>

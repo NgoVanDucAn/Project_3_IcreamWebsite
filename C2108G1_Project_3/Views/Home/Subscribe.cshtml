@@ -1,0 +1,106 @@
+﻿@using C2108G1_Project_3.Repository
+@using C2108G1_Project_3.Models
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+   
+}
+
+<!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Pricing</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Pricing</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+<!-- Pricing Table 3 Start -->
+    <div class="pricing-table-title">
+        <h2>Subcribe To Member</h2>
+    </div>
+    <div class="pricing-table table-3">
+        <div class="ptable-item">
+            <div class="ptable-single">
+                <div class="ptable-header">
+                    <div class="ptable-title">
+                        <h2>Silver</h2>
+                    </div>
+                    <div class="ptable-price">
+                        <h2><small>$</small>15<span>/ M</span></h2>
+                    </div>
+                </div>
+                <div class="ptable-body">
+                    <div class="ptable-description">
+                        <ul>
+                            <li>Pure HTML & CSS</li>
+                            <li>Google Font</li>
+                            <li>Fontawesome Icons</li>
+                            <li>Responsive Design</li>
+                            <li>Well-commented Code</li>
+                            <li>Easy to Use</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ptable-footer">
+                    <div class="ptable-action">
+                       <form method="post" action="/Subscribe/ProcessPayment">
+                                                   
+                            <button class="a" type="submit" id="amount" name="amount" value="15">
+                                <i class="fa fa-shopping-cart"></i>Buy Now
+                            </button>
+                                                   
+                       </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ptable-item">
+            <img src="img/ice-cream.png" alt="" style="width: 380px;">
+        </div>
+        <div class="ptable-item featured-item">
+            <div class="ptable-single">
+                <div class="ptable-header">
+                    <div class="ptable-title">
+                        <h2>Gold</h2>
+                    </div>
+                    <div class="ptable-price">
+                        <h2><small>$</small>150<span>/ Y</span></h2>
+                    </div>
+                </div>
+                <div class="ptable-body">
+                    <div class="ptable-description">
+                        <ul>
+                            <li>Pure HTML & CSS</li>
+                            <li>Google Font</li>
+                            <li>Fontawesome Icons</li>
+                            <li>Responsive Design</li>
+                            <li>Well-commented Code</li>
+                            <li>Easy to Use</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ptable-footer">
+                    <div class="ptable-action">
+                        <form method="post" action="/Subscribe/ProcessPayment">
+                            <button class="a" type="submit" id="amount" name="amount" value="150">
+                                <i class="fa fa-shopping-cart"></i>Buy Now
+                            </button>
+
+                       </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Pricing Table 3 End -->
+
+   

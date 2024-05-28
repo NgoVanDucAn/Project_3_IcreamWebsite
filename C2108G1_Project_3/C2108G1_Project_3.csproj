@@ -1,0 +1,120 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-C2108G1_Project_3-eb850f08-65bf-4c91-9f65-d35254cfcdf9</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\plugins\bower_components\chartist-plugin-tooltips\dist\chartist-plugin-tooltip.css" />
+    <Content Include="wwwroot\plugins\bower_components\chartist\dist\chartist.min.css" />
+    <Content Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\css\perfect-scrollbar.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.21">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="PayPal" Version="1.9.1" />
+    <PackageReference Include="Quartz" Version="3.7.0" />
+    <PackageReference Include="summernote" Version="1.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="X.PagedList" Version="8.4.7" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\pages\" />
+    <Folder Include="wwwroot\lib\bootstrap\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
+    <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
+    <Folder Include="wwwroot\lib\jquery-validation\" />
+    <Folder Include="wwwroot\lib\jquery-validation\dist\" />
+    <Folder Include="wwwroot\lib\jquery\" />
+    <Folder Include="wwwroot\lib\jquery\dist\" />
+    <Folder Include="wwwroot\UploadImg\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\bootstrap\dist\.DS_Store" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\plugins\bower_components\.DS_Store" />
+    <None Include="wwwroot\plugins\bower_components\chartist-plugin-tooltips\dist\chartist-plugin-tooltip.min.js" />
+    <None Include="wwwroot\plugins\bower_components\chartist\dist\chartist.min.js" />
+    <None Include="wwwroot\plugins\bower_components\counterup\jquery.counterup.min.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\gmaps.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\gmaps.min.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\gmaps.min.js.map" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\jquery.gmaps.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.controls.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.core.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.events.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.geofences.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.geometry.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.layers.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.map_types.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.markers.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.native_extensions.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.overlays.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.routes.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.static.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.streetview.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.styles.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.utils.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery-sparkline\jquery.charts-sparkline.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery-sparkline\jquery.sparkline.min.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery\dist\core.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery\dist\jquery.slim.min.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\js\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\js\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.common.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.esm.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\esm\popper-utils.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\esm\popper.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\popper-utils.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\popper.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\umd\popper-utils.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\umd\popper.min.js" />
+  </ItemGroup>
+
+</Project>

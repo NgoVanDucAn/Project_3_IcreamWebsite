@@ -1,0 +1,204 @@
+﻿@using C2108G1_Project_3.Repository
+@using C2108G1_Project_3.Models
+@inject IFlavorsRepostiory flavorsRepository
+@inject IBooksRepository booksRepository
+@inject IRecipesRepository recipesRepository
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+    var flavors = await flavorsRepository.GetAllAsync();
+    var books = await booksRepository.GetAllAsync();
+    var recipes = await recipesRepository.GetAllAsync();
+}
+
+<!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Flavors Table</h4>
+                    </div>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Flavors</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Books</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Recipes</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <br />
+                            <form action="CreateOrUpdateFlavor">
+                                <h3 class="box-title">FlavorTable</h3>
+                                <button class="btn btn-outline-secondary">Add New</button>
+                            </form>
+
+                            <div class="table-responsive ">
+
+                                <table class="table text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th class="border-top-0">Name</th>
+                                            <th class="border-top-0">Thumbnail</th>
+
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var flavor in flavors)
+                                        {
+                                            <tr>
+                                                
+                                                <td>@flavor.Name</td>
+                                                <td>
+                                                    <img src="/UploadImg/@flavor.thumbnail" style="width: 50px; height: 50px;" />
+                                                </td>
+
+                                                <td><a href="CreateOrUpdateFlavor/@flavor.id"><button class="btn btn-warning">Edit</button></a></td>
+                                                <form method="post" action="/Flavors/DeleteFlavor" onsubmit="return confirm('Are you sure you want to delete this flavors?');">
+                                                <td>
+                                                    <input type="hidden" name="id" value="@flavor.id" />
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </td>
+                                                </form>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <br />
+                            <form action="CreateOrUpdateBook">
+                                <h3 class="box-title"> BooksTable</h3>
+                                <button class="btn btn-outline-secondary">Add New</button>
+                            </form>
+
+                            <div class="table-responsive ">
+                                
+                                <table class="table text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th class="border-top-0">Book Name</th>
+                                            <th class="border-top-0">Thumbnail</th>
+                                            <th class="border-top-0">Author</th>
+                                            <th class="border-top-0">Price</th>
+                                            <th class="border-top-0">Quantity</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var book in books)
+                                        {
+                                             <tr>
+                                              
+                                              <td>@book.bookName</td>
+                                              <td><img src="/UploadImg/@book.thumbnail" style="width: 50px; height: 50px;" /></td>
+                                              <td>@book.author</td>
+                                              <td>@book.price</td>
+                                              <td>@book.quantity</td>
+                                              <td><a href="CreateOrUpdateBook/@book.id"><button class="btn btn-warning">Edit</button></a></td>
+                                              <form method="post" action="/Books/DeleteBook" onsubmit="return confirm('Are you sure you want to delete this book?');">
+                                                    <td><input type="hidden" name="id" value="@book.id" />
+                                                     <button type="submit" class="btn btn-danger">Delete</button></td>
+                                              </form>
+                                            </tr>
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                            </div></div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <br />
+                            <form action="CreateOrUpdateRecipe">
+                                <h3 class="box-title">RecipesTable</h3>
+                                <button class="btn btn-outline-secondary">Add New</button>
+                            </form>
+
+                            <div class="table-responsive ">
+
+                                <table class="table text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th class="border-top-0">Name</th>
+                                            <th class="border-top-0">Thumbnail</th>
+                                            <th class="border-top-0">IsTop</th>
+                                            <th class="border-top-0">IsFree</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var recipe in recipes)
+                                        {
+                                            <tr>
+                                                
+                                                <td>@recipe.recipeName</td>
+                                                <td><img src="/UploadImg/@recipe.thumbnail" style="width: 50px; height: 50px;" /></td>
+                                                <td>@recipe.isTop</td>
+                                                <td>@recipe.IsFree</td>
+                                                <td><a href="CreateOrUpdateRecipe/@recipe.id"><button class="btn btn-warning">Edit</button></a></td>
+                                                <form method="post" action="/Recipes/DeleteRecipe" onsubmit="return confirm('Are you sure you want to delete this Recipe?');">
+                                                <td>
+                                                    <input type="hidden" name="id" value="@recipe.id" />
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </td>
+                                                </form>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->

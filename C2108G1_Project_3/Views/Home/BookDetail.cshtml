@@ -1,0 +1,140 @@
+﻿@using C2108G1_Project_3.Repository
+@using C2108G1_Project_3.Models
+@inject IBooksRepository booksRepository
+
+@{
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    var books = await booksRepository.GetAllAsync();
+
+    var x = new Books();
+    if (Model > 0)
+    {
+        x = await booksRepository.GetByIdAsync(Model);
+    }
+}
+
+<!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Book Detail</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Book Detail</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Contact Start -->
+    <div class="container">
+        <div class="product-view container">
+            <div class="product-essential">
+                <div class="row">
+                    <div class="product-img-box col-lg-7" style="visibility: visible;">
+                        <div class="product-image">
+                            <div class="product-image">
+                                <img src="~/UploadImg/@x.thumbnail" alt="" width="400" height="400">
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                     </div>
+                     <br>
+                     <div class="product-shop col-lg-5" style="visibility: visible;">
+                        <div class="product-name">
+                            <h1>@x.bookName</h1>
+                        </div>
+                        <div>
+                        <label>Author:</label>
+                            <a title="Show vendor" href="">@x.author</a>
+                        </div>
+
+                        <div class="price-block">
+                            <div class="price-box special-price">
+                            <label>Price:</label>
+                                <span class="price">@x.price$</span>
+                            </div>
+                        </div>
+                        <div class="short-description"> </div> 
+                        <div class="add-to-box">
+                            <div class="add-to-cart">
+                            <form action="/home/Order/@x.id" method="get" enctype="multipart/form-data" class="form-inline edit_data">
+                                    <input type="hidden" name="id" id="">
+                                    <label class="sl" for="qty">Quatity: </label>
+                                    <div class="pull-left qty-number">
+
+                                        <div class="custom pull-left">
+                                            <button class="reduced items-count" type="button" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty > 1 ) result.value--;return false;">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        <input type="text" class="input-text qty" title="Qty" min="1" maxlength="12" id="qty" value="1" name="quantity">
+                                        <button class="increase items-count" type="button" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) && qty < @x.quantity) result.value++;return false;">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="dt-cart">
+                                            <button type="submit" class="btn btn-outline-success">
+                                                Buy
+                                        </button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+
+
+                    <div class="product-collateral wow bounceInUp animated animated" style="visibility: visible;">
+                        <div>
+                            <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
+                                <li class="active">
+                                    <h5><a href="">Infomation </a></h5>
+                                </li>
+                            </ul>
+                        </div>
+                            @x.bookDescription
+</div>
+
+                     </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="section-title position-relative mb-5">related books</h1>
+                </div>
+                <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
+            </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-carousel product-carousel">
+
+                    @foreach (var book in books)
+                    {
+                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
+                            <div class="bg-primary mt-n5 py-3" style="width: 80px;">
+                                <h4 class="font-weight-bold text-white mb-0">@book.price $</h4>
+                            </div>
+                            <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
+                                <img class="rounded-circle w-100 h-100" src="~/UploadImg/@book.thumbnail" style="object-fit: cover;">
+                            </div>
+                            <h5 class="font-weight-bold mb-4">@book.bookName</h5>
+                            <h6 class="font-weight-bold mb-4">Author: @book.author</h6>
+                            <a href="/@book.id" class="btn btn-sm btn-secondary">Order Now</a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Contact End -->

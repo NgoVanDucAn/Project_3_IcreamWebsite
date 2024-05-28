@@ -1,0 +1,49 @@
+﻿@using C2108G1_Project_3.Repository
+@using C2108G1_Project_3.Models
+@inject IBooksRepository booksRepository
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    var books = await booksRepository.GetAllAsync();
+}
+<div class="book-list">
+    @foreach (var book in books)
+    {
+        <div class="book-item">
+            <img src="~/UploadImg/@book.thumbnail" alt="@book.bookName" />
+            <h2>@book.bookName</h2>
+            <button class="btn-buy" book-id="@book.id" book-name="@book.bookName" book-avt="@book.thumbnail">Buy</button>
+            <input type="text" class="input-text input-quantity" title="Qty" min="1" maxlength="12" id="qty" name="input-quantity">
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".btn-buy").click(function () {
+            var book_id = $(this).attr('book-id');
+            var book_name = $(this).attr('book-name');
+            var book_avatar = $(this).attr('book-avt');
+            var quantity = $('.input-quantity').val();
+
+            var order_item = {
+                id: book_id,
+                bookName: book_name,
+                thumbnail: book_avatar,
+                quantity: quantity
+            };
+
+            var orders = localStorage.getItem('book_order');
+            if (!orders) {
+                localStorage.setItem('book_order', JSON.stringify([]));
+                orders = [];
+            } else {
+                orders = JSON.parse(orders);
+            }
+
+            orders.push(order_item);
+            localStorage.setItem('book_order', JSON.stringify(orders));
+        });
+    });
+</script>

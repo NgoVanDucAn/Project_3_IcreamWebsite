@@ -1,0 +1,98 @@
+﻿@using C2108G1_Project_3.Repository
+@using C2108G1_Project_3.Models
+
+@inject IRecipesRepository recipesRepository
+@inject IFlavorsRepostiory flavorRepository
+
+@{
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    var recipe = await recipesRepository.GetAllAsync();
+   
+    var x = new Recipes();
+    
+    
+    if (Model > 0)
+    {
+        x = await recipesRepository.GetByIdAsync(Model);
+        
+    }
+    
+
+}
+ <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Recipe Detail</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Recipe Detail</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Products Start -->
+    <div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h1 class="section-title position-relative text-center mb-5">@x.recipeName</h1>
+        </div>
+        <div></div>
+    </div>
+        <div class="container py-5">
+            <section>
+                <div class="container">
+                  <div>
+                 
+                 <h3>  @x.introduce</h3>
+                 
+                 <hr class="mb-4"/>
+                    
+                 <div>
+                     @Html.Raw(x.recipeDescription)
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+
+        </div>
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="section-title position-relative mb-5">Some Recipes We Recommend</h1>
+                </div>
+                <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel product-carousel">
+
+                        @foreach (var re in recipe)
+                        {
+                            <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
+
+                                <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
+                                    <img class="rounded-circle w-100 h-100" src="~/UploadImg/@re.thumbnail" style="object-fit: cover;">
+                                </div>
+                                <h5 class="font-weight-bold mb-4" size="30">@re.recipeName</h5>
+
+                                <p>Outhor Name: @re.Users</p>
+
+
+                                <a href="@re.id" class="btn btn-sm btn-secondary">View Now</a>
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Products End -->

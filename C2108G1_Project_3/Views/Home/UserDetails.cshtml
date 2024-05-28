@@ -1,0 +1,146 @@
+﻿
+@using C2108G1_Project_3.Repository
+@using C2108G1_Project_3.Models
+@model C2108G1_Project_3.Models.Users
+@inject IRecipesRepository recipesRepository
+@inject IFlavorsRepostiory flavorsRepositry
+@{
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    string userId = Model.Id; // Thay thế 123 bằng id của người dùng bạn muốn lấy recipes
+    List<Recipes> userRecipes = await recipesRepository.GetRecipesByUserId(userId);
+    
+}
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<!-- Header Start -->
+<div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+    <div class="container text-center py-5">
+        <h1 class="text-white display-3 mt-lg-5">UserDetail</h1>
+        <div class="d-inline-flex align-items-center text-white">
+            <p class="m-0"><a class="text-white" href="/Home/index">Home</a></p>
+            <i class="fa fa-circle px-3"></i>
+            <p class="m-0">UserDetail</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+<div class="container">
+    <div class="row" style="margin-top:50px;">
+        <div class="col-lg-3 col-md-4">
+            <div class="text-center card-box">
+                <div class="member-card">
+                    <div class="thumb-xl member-thumb m-b-10 center-block">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-circle img-thumbnail" alt="profile-image">
+                    </div>
+
+                    <div class="">
+                        <h4 class="m-b-5">@Model.fullname</h4>
+                        <p class="text-muted">@Model.UserName</p>
+                    </div>
+                    <div class="text-center m-t-40">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <p class="text-muted font-13"><strong>Mobile: </strong><span class="m-l-15">@Model.PhoneNumber</span></p>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-sm w-sm waves-effect m-t-10 waves-light">Message</button>
+                    @*<script>
+                        // Lấy tất cả các nút nhắn tin trên trang
+                        var messageButtons = document.querySelectorAll('.btn.btn-danger.btn-sm.w-sm.waves-effect.m-t-10.waves-light');
+
+                        // Lặp qua từng nút nhắn tin
+                        messageButtons.forEach(function (button) {
+                            // Lắng nghe sự kiện nhấp vào nút
+                            button.addEventListener('click', function () {
+                                // Lấy địa chỉ email từ thuộc tính data-email
+                                var email = button.getAttribute('data-email');
+
+                                // Kiểm tra xem trình duyệt có hỗ trợ hộp thoại email không
+                                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                                    // Trình duyệt Microsoft Edge hoặc Internet Explorer
+                                    window.navigator.msSaveOrOpenBlob('mailto:' + email);
+                                } else {
+                                    // Trình duyệt khác
+                                    window.location.href = 'mailto:' + email;
+                                }
+                            });
+                        });
+                    </script>*@
+                    
+
+                    
+                </div>
+            </div> <!-- end card-box -->
+
+
+        </div> <!-- end col -->
+
+
+        <div class="col-lg-9">
+            <div class="row">
+                <div class="col-lg-9">
+                    <h1><span class="hidden-xs">POST</span></h1>
+                </div>
+            </div>
+            @if (userRecipes.Count > 0)
+            {
+                <div class="tab-pane active" id="profile">
+                    
+                    <div class="row">
+                        
+                        @foreach (var recipes in userRecipes)
+                        {
+                            List<Flavors> flavor = await flavorsRepositry.GetFlavorsById(recipes.flavorsId);
+                            <div class="col-sm-3">
+                                <div class="gal-detail thumb">
+                                    <a href="/Home/CreateOrupdateRecipesForUser/@recipes.id" class="image-popup " title="Screenshot-2">
+                                        <img src="~/UploadImg/@recipes.thumbnail" class="thumb-img align-content-center" alt="work-thumbnail" style="width:183.75px; height:183.75px;">
+                                    </a>
+                                    <h4 class="text-center">@recipes.recipeName</h4>
+                                    <div class="ga-border"></div>
+                                    @foreach (var fla in flavor)
+                                    {
+                                        <p class="text-muted text-center"><small>@fla.Name</small></p>
+                                    }
+                                    
+
+                                </div>
+
+                            </div>
+                        }
+                        
+                    </div>
+                        <div class="text-center">
+                            <form action="/Home/CreateOrupdateRecipesForUser">
+                                <button class="btn btn-outline-info" style="margin-top: 20px;">
+                                    Add New Recipes
+                                </button>
+                            </form>
+                        </div>
+                </div>
+            }
+            else
+            {
+                <br />
+                <br />
+                <h1 class="text-center">OOps! You don't have any Recipes</h1>
+                <div class="text-center">
+                    <form action="/Home/CreateOrupdateRecipesForUser">
+                       <button class="btn btn-outline-info" style="margin-top: 20px;">
+                        Add New Recipes
+                        </button>
+                    </form>
+                    
+                </div>
+            }
+            
+
+                
+            
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+    </div>
